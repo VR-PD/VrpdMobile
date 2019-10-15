@@ -10,27 +10,7 @@ namespace VrpdScanner
         {
             //InitializeComponent();
 
-            Button b = new Button() { Text = "Open scan page" };
-            b.Clicked += async (sender, e) =>
-            {
-                await Current.MainPage.Navigation.PushAsync(new ScanPage());
-            };
-            // The root page of your application
-            ContentPage content = new ContentPage
-            {
-                Title = "TestZXing",
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }, b
-                    }
-                }
-            };
-            MainPage = new NavigationPage(content);
+            MainPage = new NavigationPage(new ScanPage());
         }
 
         protected override void OnResume()
