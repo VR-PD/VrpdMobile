@@ -27,15 +27,15 @@ namespace VrpdScanner
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        if (!stat.IsSuccessful)
+                        if (stat.StatusCode == System.Net.HttpStatusCode.NoContent)
                         {
                             Navigation.PopAsync();
-                            DisplayAlert("Login request failed", "Something went wrong.", "OK");
+                            DisplayAlert("Scanned barcode, login request send!", result.Text, "OK");
                         }
                         else
                         {
                             Navigation.PopAsync();
-                            DisplayAlert("Scanned barcode, login request send!", result.Text, "OK");
+                            DisplayAlert("Login request failed", "Something went wrong.", "OK");
                         }
                     });
                 };
