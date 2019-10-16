@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
+﻿using RestSharp;
 using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 
@@ -26,11 +23,11 @@ namespace VrpdScanner
                 {
                     scanPage.IsScanning = false;
 
-                    HttpStatusCode stat = Requestor.Send(result.Text).StatusCode;
+                    IRestResponse stat = Requestor.Send(result.Text);
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        if (stat != HttpStatusCode.OK)
+                        if (!stat.IsSuccessful)
                         {
                             Navigation.PopAsync();
                             DisplayAlert("Login request failed", "Something went wrong.", "OK");
