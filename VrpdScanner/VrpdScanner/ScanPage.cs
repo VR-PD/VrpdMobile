@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Xamarin.Forms;
@@ -24,13 +25,10 @@ namespace VrpdScanner
                 scanPage.OnScanResult += (result) =>
                 {
                     scanPage.IsScanning = false;
-                    IQRData qRData;
-                    using (MemoryStream ms = new MemoryStream(result.RawBytes))
-                    {
-                        BinaryFormatter bf = new BinaryFormatter();
-                        qRData = bf.Deserialize(ms) as IQRData;
-                    }
-                    IRestResponse stat = Requestor.Send(result.Text);
+
+                    object[] data = Serializer.FromByteArray<object[]>(Convert.FromBase64String(result.Text));
+
+                    IRestResponse stat = Requestor.Send(data);
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
