@@ -27,8 +27,18 @@ namespace VrpdScanner
                     scanPage.IsScanning = false;
 
                     object[] data = Serializer.FromByteArray<object[]>(Convert.FromBase64String(result.Text));
+                    object[] dataOut = new object[3];
+                    try
+                    {
+                        dataOut[QRData.Keynum] = data[QRData.Keynum];
+                        dataOut[QRData.Created] = data[QRData.Created];
+                        dataOut[QRData.UserID] = "test user";
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                    }
 
-                    IRestResponse stat = Requestor.Send(data);
+                    IRestResponse stat = Requestor.Send(dataOut);
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
