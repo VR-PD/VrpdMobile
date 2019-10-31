@@ -4,7 +4,7 @@ namespace VrpdScanner
 {
     public static class Requestor
     {
-        private const string url = "https://localhost:44347/api/Guests";
+        private const string url = "https://vrpd-webapp.azurewebsites.net/api/Guests";
 
         public static IRestResponse Send(object[] data)
         {
