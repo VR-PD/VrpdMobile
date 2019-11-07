@@ -5,4 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="VrpdScanner.MainPage">
+
+    <StackLayout>
+        <Button x:Name="buttonScanOverlay" Text="Scan barcode" AutomationId="scnaWithDefaultOverlay" />
+    </StackLayout>
 </ContentPage>
