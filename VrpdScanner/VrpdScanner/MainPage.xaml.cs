@@ -17,44 +17,46 @@ namespace VrpdScanner
         {
             InitializeComponent();
 
-            buttonScanOverlay.Clicked += async delegate
+            buttonScanOverlay.Clicked += OnOverlayClicked;
+        }
+
+        private async void OnOverlayClicked(object sender, EventArgs e)
+        {
+            scanPage = new ZXingScannerPage();
+            scanPage.OnScanResult += (result) =>
             {
-                scanPage = new ZXingScannerPage();
-                scanPage.OnScanResult += (result) =>
+                scanPage.IsScanning = false;
+
+                object[] data = Serializer.FromByteArray<object[]>(Convert.FromBase64String(result.Text));
+                object[] dataOut = new object[3];
+                try
                 {
-                    scanPage.IsScanning = false;
+                    dataOut[QRData.Keynum] = data[QRData.Keynum];
+                    dataOut[QRData.Created] = data[QRData.Created];
+                    dataOut[QRData.UserID] = "test user";
+                }
+                catch (IndexOutOfRangeException)
+                {
+                }
 
-                    object[] data = Serializer.FromByteArray<object[]>(Convert.FromBase64String(result.Text));
-                    object[] dataOut = new object[3];
-                    try
+                IRestResponse stat = Requestor.Send(dataOut);
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (stat.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        dataOut[QRData.Keynum] = data[QRData.Keynum];
-                        dataOut[QRData.Created] = data[QRData.Created];
-                        dataOut[QRData.UserID] = "test user";
+                        Navigation.PopAsync();
+                        DisplayAlert("Scanned barcode, login request send!", result.Text, "OK");
                     }
-                    catch (IndexOutOfRangeException)
+                    else
                     {
+                        Navigation.PopAsync();
+                        DisplayAlert("Login request failed", "Something went wrong.", "OK");
                     }
-
-                    IRestResponse stat = Requestor.Send(dataOut);
-
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        if (stat.StatusCode == System.Net.HttpStatusCode.NoContent)
-                        {
-                            Navigation.PopAsync();
-                            DisplayAlert("Scanned barcode, login request send!", result.Text, "OK");
-                        }
-                        else
-                        {
-                            Navigation.PopAsync();
-                            DisplayAlert("Login request failed", "Something went wrong.", "OK");
-                        }
-                    });
-                };
-
-                await Navigation.PushAsync(scanPage);
+                });
             };
+
+            await Navigation.PushAsync(scanPage).ConfigureAwait(false);
         }
     }
 }

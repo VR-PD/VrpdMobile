@@ -17,14 +17,14 @@ namespace VrpdScanner
             }
         }
 
-        public static byte[] ToByteArray<T>(T obj)
+        public static byte[] ToByteArray<T>(T t)
         {
-            if (obj == null)
+            if (t == null)
                 return null;
             BinaryFormatter bf = new BinaryFormatter();
             using (MemoryStream ms = new MemoryStream())
             {
-                bf.Serialize(ms, obj);
+                bf.Serialize(ms, t);
                 return ms.ToArray();
             }
         }

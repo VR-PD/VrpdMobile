@@ -8,8 +8,7 @@ namespace VrpdScanner
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
-            //MainPage = new NavigationPage(new ScanPage());
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnResume()
