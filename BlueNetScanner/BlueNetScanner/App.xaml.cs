@@ -1,14 +1,23 @@
 ﻿using Xamarin.Forms;
 
-namespace VrpdScanner
+namespace BlueNetScanner
 {
     public partial class App : Application
     {
+        public static Page PrevPage;
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new MainPage();
+        }
+
+        public static void GoPageBack()
+        {
+            if (PrevPage != null)
+                Current.MainPage = PrevPage;
+            PrevPage = null;
         }
 
         protected override void OnResume()

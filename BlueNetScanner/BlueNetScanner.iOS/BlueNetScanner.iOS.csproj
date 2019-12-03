@@ -5,13 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B4ED73B1-87D9-47E2-AB17-DC41D13B8E2B}</ProjectGuid>
+    <ProjectGuid>{6829B5C2-63FE-478E-9A92-9AA9A1FC2F6A}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>VrpdScanner.iOS</RootNamespace>
+    <RootNamespace>BlueNetScanner.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>VrpdScanner.iOS</AssemblyName>
+    <AssemblyName>BlueNetScanner.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
   </PropertyGroup>
@@ -125,9 +125,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\VrpdScanner\VrpdScanner.csproj">
-      <Project>{46EA26DD-2907-4E89-9CF0-603A5C2F5D97}</Project>
-      <Name>VrpdScanner</Name>
+    <ProjectReference Include="..\BlueNetScanner\BlueNetScanner.csproj">
+      <Project>{489459BF-16DE-468F-ABEE-FF9AB7E30BFB}</Project>
+      <Name>BlueNetScanner</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

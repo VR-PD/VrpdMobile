@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace VrpdScanner.iOS
+namespace BlueNetScanner.iOS
 {
     public class Application
     {

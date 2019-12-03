@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace VrpdScanner
+namespace BlueNetScanner
 {
     public static class Serializer
     {
@@ -12,7 +12,15 @@ namespace VrpdScanner
             BinaryFormatter bf = new BinaryFormatter();
             using (MemoryStream ms = new MemoryStream(data))
             {
-                object obj = bf.Deserialize(ms);
+                object obj;
+                try
+                {
+                    obj = bf.Deserialize(ms);
+                }
+                catch (System.Exception)
+                {
+                    obj = null;
+                }
                 return (T)obj;
             }
         }

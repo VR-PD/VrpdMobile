@@ -2,10 +2,11 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using System.Security;
 
-namespace VrpdScanner.Droid
+namespace BlueNetScanner.Droid
 {
-    [Activity(Label = "VrpdScanner", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "BlueNetScanner", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -15,6 +16,7 @@ namespace VrpdScanner.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        [SecuritySafeCritical]
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;

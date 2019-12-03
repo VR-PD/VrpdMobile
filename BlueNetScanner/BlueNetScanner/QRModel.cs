@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VrpdScanner
+namespace BlueNetScanner
 {
     /// <summary>
     /// A model class to retrieve all the properties from a read QR code and to prepare to send away again as a object array
