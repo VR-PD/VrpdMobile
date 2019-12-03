@@ -38,7 +38,7 @@ namespace BlueNetScanner
                 QRModel qr = QRModel.FromArray(data);
 
                 if (qr != null)
-                    qr.UserID = "user_id";
+                    qr.UserID = DependencyService.Get<IDevice>().GetIdentifier();
 
                 IRestResponse stat = Requestor.Send(qr?.ToArray());
                 Device.BeginInvokeOnMainThread(() =>
