@@ -43,7 +43,7 @@ namespace BlueNetScanner
                 IRestResponse stat = Requestor.Send(qr?.ToArray());
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    if (stat != null && stat.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    if (stat != null && stat.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         DisplayAlert("Scanned barcode, login request send!", qr.ToString(), "OK");
                     }
