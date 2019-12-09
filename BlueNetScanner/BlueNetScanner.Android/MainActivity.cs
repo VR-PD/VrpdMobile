@@ -1,7 +1,10 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.App;
+using Android.Support.V4.Content;
 using System.Security;
 
 namespace BlueNetScanner.Droid
@@ -23,6 +26,9 @@ namespace BlueNetScanner.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            if (!(ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera) == (int)Permission.Granted))
+                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.Camera, }, 99);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
