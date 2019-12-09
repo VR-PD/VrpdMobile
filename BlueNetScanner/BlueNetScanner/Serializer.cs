@@ -5,6 +5,9 @@ namespace BlueNetScanner
 {
     public static class Serializer
     {
+        /// <summary>
+        /// Serialize bytes back to their type
+        /// </summary>
         public static T FromByteArray<T>(byte[] data)
         {
             if (data == null)
@@ -25,6 +28,9 @@ namespace BlueNetScanner
             }
         }
 
+        /// <summary>
+        /// Serialize any object type to a byte array
+        /// </summary>
         public static byte[] ToByteArray<T>(T t)
         {
             if (t == null)

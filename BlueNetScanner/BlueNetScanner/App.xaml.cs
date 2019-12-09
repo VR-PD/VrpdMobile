@@ -4,7 +4,7 @@ namespace BlueNetScanner
 {
     public partial class App : Application
     {
-        public static Page PrevPage;
+        private static Page prevPage;
 
         public App()
         {
@@ -13,8 +13,15 @@ namespace BlueNetScanner
             MainPage = new MainPage();
         }
 
+        public static Page PrevPage { get => prevPage; set => prevPage = value; }
+
+        /// <summary>
+        /// This application consists of two pages without a navigation page. This method manages the <see cref="Page.OnBackButtonPressed"/> event.
+        /// </summary>
         public static void GoPageBack()
         {
+            // If no previous page dont do anything
+            // Otherwise set previous page as main page
             if (PrevPage != null)
                 Current.MainPage = PrevPage;
             PrevPage = null;

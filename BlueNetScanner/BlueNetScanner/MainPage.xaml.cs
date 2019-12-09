@@ -19,6 +19,7 @@ namespace BlueNetScanner
 
         protected override bool OnBackButtonPressed()
         {
+            // If theres no previous page, just run base method
             if (App.PrevPage == null)
                 return base.OnBackButtonPressed();
             App.GoPageBack();
@@ -27,14 +28,18 @@ namespace BlueNetScanner
 
         private void BtnScan_Clicked(object sender, EventArgs e)
         {
+            // Make a scan page
             scanPage = new ScannerPage();
+
+            // Add event for when a QR code is scanned
             scanPage.OnScanResult += (result) =>
             {
                 scanPage.IsScanning = false;
 
+                // Deserialize bytes to objects
                 object[] data = Serializer.FromByteArray<object[]>(Convert.FromBase64String(result.Text));
 
-                // Cast raw to QRModel
+                // Cast objects to QRModel
                 QRModel qr = QRModel.FromArray(data);
 
                 if (qr != null)
@@ -45,11 +50,14 @@ namespace BlueNetScanner
                 {
                     if (stat != null && stat.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        DisplayAlert("Scanned barcode, login request send!", qr.ToString(), "OK");
+                        DisplayAlert("Scanned code, login request send!", "Succesfully logged in.", "OK");
+                    }
+                    else if (stat != null && stat.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        DisplayAlert("Login request failed", "This device is not authorized.", "OK");
                     }
                     else
                     {
-                        //await DisplayPromptAsync("Login request failed", "Something went wrong.", accept: "OK");
                         DisplayAlert("Login request failed", "Something went wrong.", "OK");
                     }
                     // Switch page back
@@ -57,7 +65,9 @@ namespace BlueNetScanner
                 });
             };
 
+            // Set current main page as previous page
             App.PrevPage = Application.Current.MainPage;
+            // Set scan page as new main page
             Application.Current.MainPage = scanPage;
         }
     }
