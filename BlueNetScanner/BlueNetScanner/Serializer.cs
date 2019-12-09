@@ -8,6 +8,7 @@ namespace BlueNetScanner
         /// <summary>
         /// Serialize bytes back to their type
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public static T FromByteArray<T>(byte[] data)
         {
             if (data == null)
